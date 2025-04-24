@@ -1,16 +1,17 @@
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const products = {
   cpvc: [
     {
       name: 'CPVC Elbow',
       image: '/images/cpvc.jpg',
+      description: 'High-quality CPVC elbow fitting designed for hot and cold water distribution systems. Features excellent chemical resistance and temperature stability.',
       sizes: [
         { value: '1/2', label: '1/2"' },
         { value: '3/4', label: '3/4"' },
@@ -30,14 +31,19 @@ const ProductsPage = () => {
   const { category } = useParams();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categoryProducts = products[category as keyof typeof products] || [];
+  // Get all products if category is 'all', otherwise get category products
+  const categoryProducts = category === 'all' 
+    ? Object.values(products).flat()
+    : products[category as keyof typeof products] || [];
+
   const filteredProducts = categoryProducts.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,7 +51,7 @@ const ProductsPage = () => {
           className="mb-8"
         >
           <h1 className="text-3xl font-bold text-gray-800 mb-4 capitalize">
-            {category?.replace('-', ' ')} Products
+            {category === 'all' ? 'All Products' : `${category?.replace('-', ' ')} Products`}
           </h1>
           
           <div className="relative max-w-md mx-auto mb-8">
