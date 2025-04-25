@@ -1,5 +1,4 @@
-
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -15,25 +14,65 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <ul className="space-y-2">
-              <li><Link to="/products/cpvc" className="text-gray-400 hover:text-white">CPVC Fittings</Link></li>
-              <li><Link to="/products/upvc" className="text-gray-400 hover:text-white">UPVC Fittings</Link></li>
-              <li><Link to="/products/pvc" className="text-gray-400 hover:text-white">PVC Fittings</Link></li>
-              <li><Link to="/products/conduit" className="text-gray-400 hover:text-white">Conduit Fittings</Link></li>
+              <li>
+                <Link
+                  to="/products/cpvc"
+                  className="text-gray-400 hover:text-white"
+                >
+                  CPVC Fittings
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products/upvc"
+                  className="text-gray-400 hover:text-white"
+                >
+                  UPVC Fittings
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products/pvc"
+                  className="text-gray-400 hover:text-white"
+                >
+                  PVC Fittings
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products/conduit"
+                  className="text-gray-400 hover:text-white"
+                >
+                  Conduit Fittings
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white">Home</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white">About Us</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white">Contact</Link></li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-400 hover:text-white">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-400 hover:text-white">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="text-gray-400 space-y-2">
               <p>Email: info@pipefitpro.com</p>
-              <p>Phone: +1 234 567 890</p>
+              <p>Phone: 8852001611</p>
               <p>Address: 123 Plumbing Street, City</p>
             </div>
           </div>
