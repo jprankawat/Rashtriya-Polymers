@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -9,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 
-// Sample products data - would typically come from an API
 const allProducts = {
   ...Object.entries({
     cpvc: [
@@ -193,7 +191,6 @@ const ProductDetailPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    // Simulate API fetch
     setIsLoading(true);
     setTimeout(() => {
       if (id && allProducts[id]) {
@@ -226,26 +223,6 @@ const ProductDetailPage = () => {
     );
   }
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      size: selectedSize,
-      quantity
-    });
-    
-    toast({
-      title: "Added to cart",
-      description: `${product.name} (${product.sizes.find((s: any) => s.value === selectedSize)?.label}) has been added to your cart`,
-    });
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
@@ -255,7 +232,6 @@ const ProductDetailPage = () => {
       })
       .catch((error) => console.log('Error sharing', error));
     } else {
-      // Fallback
       navigator.clipboard.writeText(window.location.href);
       toast({
         title: "Link copied",
@@ -274,32 +250,30 @@ const ProductDetailPage = () => {
     );
     window.open(`https://wa.me/${product.whatsappNumber}?text=${message}`, '_blank');
   };
-  
+
   return (
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="container mx-auto px-4">
-        {/* Breadcrumbs */}
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
+              <Link to="/" className="text-blue-600 hover:text-blue-800">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to={`/products/${product.category}`}>
+              <Link to={`/products/${product.category}`} className="text-blue-600 hover:text-blue-800">
                 {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-              </BreadcrumbLink>
+              </Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink>{product.name}</BreadcrumbLink>
+              {product.name}
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-            {/* Product Image */}
             <div className="flex justify-center items-center">
               <motion.img
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -312,7 +286,6 @@ const ProductDetailPage = () => {
               />
             </div>
 
-            {/* Product Details */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -323,7 +296,6 @@ const ProductDetailPage = () => {
                 <p className="text-gray-600 mb-6">{product.description}</p>
                 <div className="text-2xl font-semibold text-blue-700 mb-6">₹{product.price.toLocaleString()}</div>
 
-                {/* Size Selection */}
                 <div className="mb-6">
                   <label className="block text-gray-700 font-medium mb-2">Select Size:</label>
                   <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -343,7 +315,6 @@ const ProductDetailPage = () => {
                   </div>
                 </div>
 
-                {/* Quantity Selection */}
                 <div className="mb-6">
                   <label className="block text-gray-700 font-medium mb-2">Quantity:</label>
                   <div className="flex items-center w-32">
@@ -369,7 +340,6 @@ const ProductDetailPage = () => {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3 mb-6">
                   <Button 
                     onClick={handleAddToCart}
@@ -389,17 +359,7 @@ const ProductDetailPage = () => {
                   </Button>
                 </div>
 
-                {/* Quick Actions */}
                 <div className="flex flex-wrap gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="flex items-center gap-1"
-                    onClick={handlePrint}
-                  >
-                    <Printer size={16} />
-                    Print
-                  </Button>
                   <Button 
                     variant="outline" 
                     size="sm" 
@@ -414,7 +374,6 @@ const ProductDetailPage = () => {
             </div>
           </div>
 
-          {/* Product Information Tabs */}
           <Tabs defaultValue="details" className="p-6 border-t border-gray-200">
             <TabsList className="grid w-full grid-cols-3 md:w-auto">
               <TabsTrigger value="details">Details</TabsTrigger>
@@ -470,7 +429,6 @@ const ProductDetailPage = () => {
           </Tabs>
         </div>
 
-        {/* Contact Section */}
         <div className="mt-8 bg-white rounded-lg shadow-lg p-6">
           <h3 className="text-xl font-semibold mb-4">Need Help?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
