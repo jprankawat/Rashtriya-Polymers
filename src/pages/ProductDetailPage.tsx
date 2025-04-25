@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useToast } from '@/components/ui/use-toast';
-import { ShoppingCart, Star, Printer, Share, ArrowDown, Info, Phone, Mail, MessageSquare } from 'lucide-react';
+import { ShoppingCart, Star, Share, ArrowDown, Info, Phone, Mail, MessageSquare } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
@@ -200,6 +201,25 @@ const ProductDetailPage = () => {
       setIsLoading(false);
     }, 500);
   }, [id]);
+  
+  // Add the missing handleAddToCart function
+  const handleAddToCart = () => {
+    if (product && selectedSize) {
+      addToCart({
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        size: selectedSize,
+        quantity: quantity
+      });
+      
+      toast({
+        title: "Added to cart",
+        description: `${product.name} (${product.sizes.find((s: any) => s.value === selectedSize)?.label}) has been added to your cart`,
+      });
+    }
+  };
 
   if (isLoading) {
     return (
